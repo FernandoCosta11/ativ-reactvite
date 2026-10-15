@@ -1,0 +1,160 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  min-height: 4rem;
+}
+
+.brand {
+  font-size: var(--step-1);
+  font-weight: 800;
+  font-stretch: var(--wide);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.nav {
+  margin-left: auto;
+}
+
+.links {
+  display: flex;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  position: relative;
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.link:hover {
+  color: var(--ink);
+}
+
+/* página atual: traço em ocre logo abaixo, como uma trilha marcada no mapa */
+.active {
+  color: var(--ink);
+}
+.active::after {
+  content: '';
+  position: absolute;
+  left: var(--space-3);
+  right: var(--space-3);
+  bottom: 0;
+  height: 2px;
+  background: var(--ore);
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.lang {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  overflow: hidden;
+}
+
+.langBtn {
+  padding: 0.3rem 0.55rem;
+  border: 0;
+  background: transparent;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.langBtn[aria-pressed='true'] {
+  background: var(--pine);
+  color: var(--on-pine);
+}
+
+.iconBtn {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.iconBtn:hover {
+  background: color-mix(in srgb, var(--pine) 12%, transparent);
+}
+
+.menuBtn {
+  display: none;
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 47.99rem) {
+  .menuBtn {
+    display: grid;
+  }
+
+  .tools {
+    margin-left: auto;
+  }
+
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .navOpen {
+    display: block;
+  }
+
+  .links {
+    flex-direction: column;
+    gap: 0;
+    padding: var(--space-2) var(--gutter) var(--space-4);
+  }
+
+  .link {
+    padding: var(--space-3) 0;
+    font-size: var(--step-1);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .active::after {
+    left: auto;
+    right: 0;
+    top: 50%;
+    bottom: auto;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+}

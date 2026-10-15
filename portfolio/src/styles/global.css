@@ -1,0 +1,235 @@
+/* =========================================================
+   Tokens
+   Paleta inspirada na paisagem de Minas: verde de serra,
+   cinza de rocha e um ocre de minério usado só como marcador.
+   ========================================================= */
+:root {
+  --bg: #eef1ec;
+  --surface: #f7f9f5;
+  --ink: #1d2b2a;
+  --muted: #586966;
+  --line: #c8d1ca;
+  --pine: #2f5d50;
+  --pine-strong: #234a3f;
+  --on-pine: #f2f5f1;
+  --ore: #b8862b;
+  --ore-text: #8a6416;
+  --danger: #a3372b;
+  --ok: #2f6d3c;
+
+  --font: 'Archivo Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --wide: 125%;
+  --narrow: 82%;
+
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: 1.5625rem;
+  --step-3: 2rem;
+  --step-4: clamp(2.5rem, 6vw + 0.5rem, 4.5rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  --max: 70rem;
+  --gutter: 1rem;
+  --radius-s: 4px;
+  --radius-m: 10px;
+
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #142120;
+  --surface: #1b2b29;
+  --ink: #e3e9e4;
+  --muted: #9aaba6;
+  --line: #2e413e;
+  --pine: #7fb3a2;
+  --pine-strong: #9cc8b9;
+  --on-pine: #10201d;
+  --ore: #d4a24a;
+  --ore-text: #e0b766;
+  --danger: #ec8a7d;
+  --ok: #8fd19b;
+  color-scheme: dark;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --gutter: 2rem;
+  }
+}
+
+/* =========================================================
+   Base
+   ========================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.1;
+  font-stretch: var(--wide);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ore);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--pine);
+  color: var(--on-pine);
+}
+
+/* =========================================================
+   Utilitários
+   ========================================================= */
+.container {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -3rem;
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  background: var(--pine);
+  color: var(--on-pine);
+  border-radius: var(--radius-s);
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: var(--space-3);
+}
+
+/* Cabeçalho padrão das páginas internas */
+.page-head {
+  padding-block: var(--space-7) var(--space-6);
+  max-width: 44rem;
+}
+.page-head h1 {
+  font-size: var(--step-4);
+}
+.page-head p {
+  margin-top: var(--space-4);
+  font-size: var(--step-1);
+  color: var(--muted);
+  max-width: 36rem;
+}
+
+/* Botões */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 2.75rem;
+  padding: 0 var(--space-5);
+  border-radius: var(--radius-s);
+  border: 1.5px solid var(--pine);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.btn-primary {
+  background: var(--pine);
+  color: var(--on-pine);
+}
+.btn-primary:hover {
+  background: var(--pine-strong);
+  border-color: var(--pine-strong);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--pine);
+}
+.btn-ghost:hover {
+  background: color-mix(in srgb, var(--pine) 10%, transparent);
+}
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

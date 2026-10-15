@@ -1,0 +1,194 @@
+/* ---------- filtro ---------- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--line);
+}
+
+.filterLabel {
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+.filterButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  font-size: var(--step--1);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: var(--pine);
+}
+
+.chip[aria-pressed='true'] {
+  background: var(--pine);
+  border-color: var(--pine);
+  color: var(--on-pine);
+}
+
+.count {
+  margin-left: auto;
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+.empty {
+  padding-block: var(--space-7);
+  color: var(--muted);
+}
+
+/* ---------- linha do tempo ----------
+   Colunas: data | trilha | projeto
+   No celular, a data vai para cima do projeto e a trilha fica à esquerda. */
+.timeline {
+  --rail: 2rem;
+  position: relative;
+  margin: 0;
+  padding: var(--space-7) 0 0;
+  list-style: none;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: var(--space-7);
+  bottom: 0;
+  left: calc(var(--rail) / 2 - 1px);
+  width: 2px;
+  background: repeating-linear-gradient(to bottom, var(--line) 0 6px, transparent 6px 12px);
+}
+
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--rail) minmax(0, 1fr);
+  grid-template-areas:
+    'marker when'
+    '. card';
+  column-gap: var(--space-4);
+  row-gap: var(--space-3);
+  padding-bottom: var(--space-7);
+}
+
+.when {
+  grid-area: when;
+  align-self: center;
+  font-weight: 700;
+  font-stretch: var(--wide);
+  color: var(--muted);
+  text-transform: lowercase;
+}
+
+.marker {
+  grid-area: marker;
+  justify-self: center;
+  align-self: center;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  border: 2px solid var(--pine);
+  background: var(--bg);
+  z-index: 1;
+}
+
+/* o projeto mais recente é o ponto onde estou agora */
+.latest .marker {
+  width: 1.1rem;
+  height: 1.1rem;
+  border-color: var(--ore);
+  background: var(--ore);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--ore) 22%, transparent);
+}
+
+.latest .when {
+  color: var(--ore-text);
+}
+
+.card {
+  grid-area: card;
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 48rem) {
+  .item {
+    grid-template-columns: 8rem var(--rail) minmax(0, 1fr);
+    grid-template-areas: 'when marker card';
+    column-gap: var(--space-5);
+  }
+
+  .timeline::before {
+    left: calc(8rem + var(--space-5) + var(--rail) / 2 - 1px);
+  }
+
+  .when,
+  .marker {
+    align-self: start;
+    margin-top: 0.35rem;
+  }
+
+  .when {
+    text-align: right;
+  }
+
+  .card {
+    grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
+    gap: var(--space-6);
+    align-items: start;
+  }
+}
+
+.name {
+  font-size: var(--step-3);
+}
+
+.description {
+  margin-top: var(--space-3);
+  max-width: 38rem;
+}
+
+.tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tech li {
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-s);
+  background: color-mix(in srgb, var(--pine) 12%, transparent);
+  color: var(--pine-strong);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.repo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+  font-weight: 600;
+  color: var(--pine);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+.repo:hover {
+  text-decoration-thickness: 2px;
+}
